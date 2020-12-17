@@ -6,10 +6,7 @@ import pyperclip # used for clipboard
 import string    # used for strings
 
 def main():
-    if (len(sys.argv) < 1):
-        print("too few arguments: -option | argument")
-
-    else:
+    try:
         if (sys.argv[1] == "-help"):
             print("SEARCH(-s) : -s service")
             print("CHANGE(-c) : -c service password")
@@ -27,10 +24,10 @@ def main():
                 print("No Results")
 
             elif (len(results) == 1):
-                print("Password Copied")
                 passResult = passwords[results[0]]
                 passDelimited = passResult.split()
                 pyperclip.copy(passDelimited[1]) # copy password
+                print("Password Copied")
 
             elif (len(results) > 1):
                 print("Did you mean:") 
@@ -48,12 +45,12 @@ def main():
                 print("No Results")
 
             elif (len(results) == 1):
-                print("Updated")
                 passResult = passwords[results[0]]
                 passDelimited = passResult.split()
 
-                deleteLine(passDelimited[0], passDelimited[1]) # delete existing line
                 insertAccount(passDelimited[0], sys.argv[3]) # write new line
+                deleteLine(passDelimited[0], passDelimited[1]) # delete existing line
+                print("Updated")
 
             elif (len(results) > 1):
                 print("Did you mean:") 
@@ -71,11 +68,11 @@ def main():
                 print("No Results")
 
             elif (len(results) == 1):
-                print("Deleted")
                 passResult = passwords[results[0]]
                 passDelimited = passResult.split()
 
                 deleteLine(passDelimited[0], passDelimited[1]) # delete existing line
+                print("Deleted")
 
             elif (len(results) > 1):
                 print("Did you mean:") 
@@ -87,6 +84,9 @@ def main():
         # Insert
         if (sys.argv[1] == "-i"):
             insertAccount(sys.argv[2], sys.argv[3])
+
+    except IndexError:
+        print("Error: too few arguments")
 
 # Read password file
 def readFile(fileName):
