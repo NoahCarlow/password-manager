@@ -10,4 +10,4 @@ Uses:\
 -s reddit\
 -c reddit password123\
 -d reddit\
--i github random\
+-i github random
