@@ -4,7 +4,7 @@ SEARCH(-s) : -s service\
 CHANGE(-c) : -c service password\
 DELETE(-c) : -d service\
 INSERT(-i) : -i service password\
-options: entering 'random' as password generates random password\
+options: entering 'random' as password generates random password
 
 Uses:\
 -s reddit\
